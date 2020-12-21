@@ -1,0 +1,270 @@
+# crud-file
+add,edit,delete,list and update
+<html>
+
+<head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+<div class="container jumbotron jumbtron-fuild mt-5 w-5">
+
+<div class="bg-primary">
+
+<table id="table" border="2">
+    <h1 class="text-dark" style="text-align:center">list</h1>
+
+<tr>
+ 
+<th>Username</th>
+
+<th>Email</th>
+
+<th>Phone_no</th>
+
+ 
+
+</tr>
+
+</table>
+ 
+ 
+
+</div>
+ 
+<div class="container ">
+
+<form action="#">
+
+ 
+
+Username<input type="text" id="uname" class="form-control" ><br>
+
+Email<input type="email" id="email" class="form-control" ><br>
+
+phone_no<input type="numbers" id="num" class="form-control" ><br>
+ 
+<button onclick="addTable()" class="btn btn-primary">add</button>
+
+<button onclick="editElement()" class="btn btn-info">edit</button>
+
+<button onclick="removesRow()" class="btn btn-danger">delete</button>
+<button onclick="disp()" class="btn btn-dark">sorting</button>
+ 
+
+</form>
+
+</div>
+ 
+</div>
+
+<script>
+
+var rIndex,
+
+table =document.getElementById("table")
+
+function checkEmptyInput()
+
+{
+
+var isEmpty=true,
+
+uname=document.getElementById("uname").value;
+
+email=document.getElementById("email").value;
+
+num=document.getElementById("num").value;
+
+if (uname=="")
+
+{
+
+alert("Username can't be empty");
+
+isEmpty = true;
+
+}
+
+else if (email=="")
+
+{
+
+alert("email can't be empty");
+
+isEmpty = true;
+
+}
+
+else if (num=="")
+
+{
+
+alert("num can't be empty");
+
+isEmpty = true;
+
+}
+
+return isEmpty;
+
+}
+
+function addTable()
+
+{
+
+if(!checkEmptyInput()){}
+
+var table=document.getElementById("table");
+
+var newRow= table.insertRow(table.length);
+
+cell1=newRow.insertCell(0);
+
+cell2=newRow.insertCell(1);
+
+cell3=newRow.insertCell(2);
+
+ 
+
+uname=document.getElementById("uname").value;
+
+email=document.getElementById("email").value;
+
+num=document.getElementById("num").value;
+
+ 
+
+cell1.innerHTML=uname;
+
+cell2.innerHTML=email;
+
+cell3.innerHTML=num;
+
+ 
+selectRowToInput();
+ 
+
+}
+
+
+
+function selectRowToInput()
+
+{
+
+ 
+
+for(var i=1; i<table.rows.length; i++)
+
+{
+
+table.rows[i].onclick = function()
+
+{
+
+rIndex=this.rowIndex;
+
+ 
+
+document.getElementById("uname").value=this.cells[0].innerHTML;
+
+document.getElementById("email").value=this.cells[1].innerHTML;
+
+document.getElementById("num").value=this.cells[2].innerHTML;
+
+
+
+ 
+
+};
+
+}
+
+ 
+
+}
+
+
+var uname =document.getElementById("uname").value;
+
+email =document.getElementById("email").value;
+
+num =document.getElementById("num").value;
+ 
+table.rows[rIndex].cells[0].innerHTML=uname;
+
+table.rows[rIndex].cells[1].innerHTML=email;
+
+table.rows[rIndex].cells[2].innerHTML=num;
+ 
+
+
+function removesRow()
+
+{
+
+table.deleteRow(rIndex);
+
+document.getElementById("uname").value="";
+
+document.getElementById("email").value="";
+
+document.getElementById("num").value="";
+
+}
+function disp() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("table");
+  switching = true;
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      // Check if the two rows should switch place:
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        // If so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+</script>
+ 
+ 
+
+</body>
+ 
+</html>
